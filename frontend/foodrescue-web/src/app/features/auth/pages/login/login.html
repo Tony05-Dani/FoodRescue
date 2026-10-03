@@ -1,0 +1,119 @@
+<div class="login-page">
+
+  <div class="login-container">
+
+    <!-- LADO IZQUIERDO -->
+    <div class="login-brand">
+
+      <div class="brand-icon">
+        🥗
+      </div>
+
+      <h1>Food Rescue</h1>
+
+      <p>
+        Gestiona tus alimentos de forma inteligente y reduce
+        el desperdicio.
+      </p>
+
+    </div>
+
+
+    <!-- LADO DERECHO -->
+    <div class="login-form">
+
+      <h2>Bienvenido</h2>
+
+      <p class="subtitle">
+        Inicia sesión para continuar
+      </p>
+
+
+      <label for="correo">
+        Correo electrónico
+      </label>
+
+      <input
+        id="correo"
+        type="email"
+        [(ngModel)]="correo"
+        placeholder="correo@ejemplo.com"
+      >
+
+
+      <label for="contrasena">
+        Contraseña
+      </label>
+
+      <div class="password-container">
+
+        <input
+          id="contrasena"
+          [type]="mostrarContrasena ? 'text' : 'password'"
+          [(ngModel)]="contrasena"
+          placeholder="Ingresa tu contraseña"
+        >
+
+        <button
+          type="button"
+          class="show-password"
+          (click)="cambiarContrasena()"
+        >
+          {{ mostrarContrasena ? 'Ocultar' : 'Mostrar' }}
+        </button>
+
+      </div>
+
+
+      @if (error) {
+        <div class="error-message">
+          {{ error }}
+        </div>
+      }
+
+
+      <div class="login-options">
+
+        <label class="remember">
+
+          <input type="checkbox">
+
+          <span>Recordarme</span>
+
+        </label>
+
+        <a href="#">
+          ¿Olvidaste tu contraseña?
+        </a>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="login-button"
+        (click)="iniciarSesion()"
+      >
+        Iniciar sesión
+      </button>
+
+
+      <div class="demo-info">
+
+        <p>Accesos de prueba</p>
+
+        <small>
+          Administrador: admin@foodrescue.com
+        </small>
+
+        <small>
+          Usuario: usuario@foodrescue.com
+        </small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

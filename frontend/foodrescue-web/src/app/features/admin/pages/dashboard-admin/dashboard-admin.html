@@ -1,0 +1,166 @@
+<div class="dashboard">
+
+  <aside class="sidebar">
+
+    <div class="logo">
+      <div class="logo-icon">🥗</div>
+      <div>
+        <h2>Food Rescue</h2>
+        <span>Panel administrativo</span>
+      </div>
+    </div>
+
+    <nav>
+      <a class="active">
+        <span>📊</span>
+        Dashboard
+      </a>
+
+      <a>
+        <span>🍎</span>
+        Alimentos
+      </a>
+
+      <a>
+        <span>➕</span>
+        Registrar alimento
+      </a>
+
+      <a>
+        <span>👥</span>
+        Usuarios
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button>
+        🚪 Cerrar sesión
+      </button>
+    </div>
+
+  </aside>
+
+
+  <main class="main-content">
+
+    <header class="topbar">
+
+      <div>
+        <p class="welcome">Panel de administración</p>
+        <h1>Dashboard</h1>
+      </div>
+
+      <div class="user-info">
+        <div class="avatar">A</div>
+
+        <div>
+          <strong>Administrador</strong>
+          <span>Administrador</span>
+        </div>
+      </div>
+
+    </header>
+
+
+    <section class="content">
+
+      <div class="intro">
+        <div>
+          <h2>Resumen de alimentos</h2>
+          <p>Consulta el estado actual de los alimentos registrados.</p>
+        </div>
+
+        <button class="primary-button">
+          + Registrar alimento
+        </button>
+      </div>
+
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-icon green">🍎</div>
+
+          <div>
+            <span>Disponibles</span>
+            <strong>{{ alimentosDisponibles }}</strong>
+            <small>Alimentos disponibles</small>
+          </div>
+        </div>
+
+
+        <div class="card">
+          <div class="card-icon yellow">⚠️</div>
+
+          <div>
+            <span>Consumo prioritario</span>
+            <strong>{{ consumoPrioritario }}</strong>
+            <small>Requieren atención</small>
+          </div>
+        </div>
+
+
+        <div class="card">
+          <div class="card-icon red">🚨</div>
+
+          <div>
+            <span>Vencidos</span>
+            <strong>{{ alimentosVencidos }}</strong>
+            <small>No disponibles</small>
+          </div>
+        </div>
+
+
+        <div class="card">
+          <div class="card-icon blue">📦</div>
+
+          <div>
+            <span>Total</span>
+            <strong>{{ totalAlimentos }}</strong>
+            <small>Alimentos registrados</small>
+          </div>
+        </div>
+
+      </div>
+
+
+      <section class="recent-section">
+
+        <div class="section-header">
+          <div>
+            <h2>Gestión de alimentos</h2>
+            <p>Administra los alimentos registrados en el sistema.</p>
+          </div>
+
+          <button class="view-button">
+            Ver todos
+          </button>
+        </div>
+
+
+        <div class="empty-state">
+
+          <div class="empty-icon">
+            🍃
+          </div>
+
+          <h3>Lista de alimentos</h3>
+
+          <p>
+            Aquí aparecerán los alimentos registrados
+            desde el sistema.
+          </p>
+
+          <button class="primary-button">
+            + Registrar alimento
+          </button>
+
+        </div>
+
+      </section>
+
+    </section>
+
+  </main>
+
+</div>

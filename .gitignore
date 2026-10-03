@@ -14,3 +14,15 @@
 
 # Configuración local
 **/appsettings.Development.json
+
+# .NET
+**/bin/
+**/obj/
+
+# Visual Studio
+.vs/
+
+# Node
+node_modules/
+dist/
+.angular/

@@ -1,0 +1,111 @@
+<div class="dashboard">
+
+  <aside class="sidebar">
+
+    <div class="brand">
+      <span>🥗</span>
+      <h2>Food Rescue</h2>
+    </div>
+
+    <nav>
+      <a class="active">📊 Dashboard</a>
+      <a>🍎 Alimentos</a>
+      <a>👥 Usuarios</a>
+      <a>📋 Reportes</a>
+    </nav>
+
+    <button class="logout" (click)="cerrarSesion()">
+      🚪 Cerrar sesión
+    </button>
+
+  </aside>
+
+  <main class="content">
+
+    <header>
+      <div>
+        <h1>Dashboard</h1>
+        <p>Panel de administración de Food Rescue</p>
+      </div>
+
+      <div class="user">
+        <div class="avatar">A</div>
+        <div>
+          <strong>Administrador</strong>
+          <small>Administrador</small>
+        </div>
+      </div>
+    </header>
+
+    <section class="welcome">
+      <div>
+        <h2>¡Bienvenido, Administrador! 👋</h2>
+        <p>
+          Desde aquí puedes controlar y gestionar los alimentos
+          registrados en el sistema.
+        </p>
+      </div>
+    </section>
+
+    <section class="cards">
+
+      <div class="card">
+        <span class="icon">🍎</span>
+        <div>
+          <p>Total de alimentos</p>
+          <h3>0</h3>
+        </div>
+      </div>
+
+      <div class="card available">
+        <span class="icon">✅</span>
+        <div>
+          <p>Disponibles</p>
+          <h3>0</h3>
+        </div>
+      </div>
+
+      <div class="card priority">
+        <span class="icon">⚠️</span>
+        <div>
+          <p>Consumo prioritario</p>
+          <h3>0</h3>
+        </div>
+      </div>
+
+      <div class="card expired">
+        <span class="icon">❌</span>
+        <div>
+          <p>Vencidos</p>
+          <h3>0</h3>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="panel">
+
+      <div class="panel-header">
+        <div>
+          <h2>Gestión de alimentos</h2>
+          <p>Administra los productos registrados.</p>
+        </div>
+
+        <button class="primary-button">
+          + Nuevo alimento
+        </button>
+      </div>
+
+      <div class="empty">
+        <span>🥗</span>
+        <h3>No hay alimentos registrados</h3>
+        <p>
+          Cuando registres alimentos aparecerán aquí.
+        </p>
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
