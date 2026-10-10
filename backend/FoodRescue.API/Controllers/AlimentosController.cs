@@ -1,3 +1,4 @@
+
 using FoodRescue.API.Data;
 using FoodRescue.API.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -16,11 +17,58 @@ public class AlimentosController : ControllerBase
         _context = context;
     }
 
+    private static string CalcularEstado(DateTime fechaVencimiento)
+    {
+        int dias = (fechaVencimiento.Date - DateTime.Today).Days;
+
+        if (dias < 0)
+        {
+            return "No disponible";
+        }
+
+        if (dias <= 3)
+        {
+            return "Consumo prioritario";
+        }
+
+        return "Disponible";
+    }
+
+    private static bool ActualizarEstado(Alimento alimento)
+    {
+        string estadoCalculado =
+            CalcularEstado(alimento.FechaVencimiento);
+
+        if (alimento.Estado == estadoCalculado)
+        {
+            return false;
+        }
+
+        alimento.Estado = estadoCalculado;
+        return true;
+    }
+
     // GET: api/Alimentos
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Alimento>>> GetAlimentos()
     {
-        return await _context.Alimentos.ToListAsync();
+        var alimentos = await _context.Alimentos.ToListAsync();
+        bool huboCambios = false;
+
+        foreach (var alimento in alimentos)
+        {
+            if (ActualizarEstado(alimento))
+            {
+                huboCambios = true;
+            }
+        }
+
+        if (huboCambios)
+        {
+            await _context.SaveChangesAsync();
+        }
+
+        return alimentos;
     }
 
     // GET: api/Alimentos/1
@@ -34,13 +82,22 @@ public class AlimentosController : ControllerBase
             return NotFound();
         }
 
+        if (ActualizarEstado(alimento))
+        {
+            await _context.SaveChangesAsync();
+        }
+
         return alimento;
     }
 
     // POST: api/Alimentos
     [HttpPost]
-    public async Task<ActionResult<Alimento>> PostAlimento(Alimento alimento)
+    public async Task<ActionResult<Alimento>> PostAlimento(
+        Alimento alimento)
     {
+        alimento.Estado =
+            CalcularEstado(alimento.FechaVencimiento);
+
         _context.Alimentos.Add(alimento);
         await _context.SaveChangesAsync();
 
@@ -53,12 +110,17 @@ public class AlimentosController : ControllerBase
 
     // PUT: api/Alimentos/1
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAlimento(int id, Alimento alimento)
+    public async Task<IActionResult> PutAlimento(
+        int id,
+        Alimento alimento)
     {
         if (id != alimento.Id)
         {
             return BadRequest();
         }
+
+        alimento.Estado =
+            CalcularEstado(alimento.FechaVencimiento);
 
         _context.Entry(alimento).State = EntityState.Modified;
 

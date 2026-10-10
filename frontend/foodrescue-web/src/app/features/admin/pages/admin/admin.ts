@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -12,12 +13,21 @@ export class Admin {
 
   constructor(private router: Router) {}
 
-  abrirDashboard() {
+  abrirDashboard(): void {
     this.router.navigate(['/admin/dashboard']);
   }
 
-  cerrarSesion() {
+  abrirAlimentos(): void {
+    this.router.navigate(['/admin/alimentos']);
+  }
+
+  abrirLotes(): void {
+  this.router.navigate(['/admin/lotes']);
+  }
+
+  cerrarSesion(): void {
     localStorage.removeItem('usuario');
     this.router.navigate(['/login']);
   }
 }
+

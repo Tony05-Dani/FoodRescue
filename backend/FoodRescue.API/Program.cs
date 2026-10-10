@@ -1,4 +1,5 @@
 using FoodRescue.API.Data;
+using FoodRescue.API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +11,19 @@ builder.Services.AddDbContext<FoodRescueDbContext>(options =>
 
 builder.Services.AddControllers();
 
+builder.Services.AddHostedService<ActualizacionAlimentosService>();
+
 builder.Services.AddOpenApi();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AngularPolicy", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
@@ -20,6 +33,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AngularPolicy");
 
 app.MapControllers();
 

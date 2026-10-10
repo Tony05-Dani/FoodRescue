@@ -1,17 +1,43 @@
-import { Component } from '@angular/core';
+
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { Alimentos } from '../../../../core/services/alimentos';
 
 @Component({
   selector: 'app-dashboard-admin',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './dashboard-admin.html',
   styleUrl: './dashboard-admin.css'
 })
-export class DashboardAdmin {
+export class DashboardAdmin implements OnInit {
 
-  alimentosDisponibles = 12;
-  consumoPrioritario = 5;
-  alimentosVencidos = 3;
-  totalAlimentos = 20;
+  alimentos: any[] = [];
 
+  constructor(
+    private alimentosService: Alimentos,
+    private cdr: ChangeDetectorRef,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.alimentosService.obtenerAlimentos().subscribe({
+      next: (datos) => {
+        this.alimentos = datos;
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        console.error('Error al obtener los alimentos:', error);
+      }
+    });
+  }
+
+  irAlimentos(): void {
+    this.router.navigate(['/admin/alimentos']);
+  }
+  volver(): void {
+  this.router.navigate(['/admin']);
+  }
 }
+

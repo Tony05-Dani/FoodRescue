@@ -9,9 +9,9 @@
 
     <nav>
       <a class="active">📊 Dashboard</a>
-      <a>🍎 Alimentos</a>
-      <a>👥 Usuarios</a>
-      <a>📋 Reportes</a>
+      <a routerLink="/admin/alimentos">🍴 Alimentos</a>
+      <a routerLink="/admin/usuarios">👥 Usuarios</a>
+      <a routerLink="/admin/reportes">📋 Reportes</a>
     </nav>
 
     <button class="logout" (click)="cerrarSesion()">
@@ -23,7 +23,23 @@
   <main class="content">
 
     <header>
+
       <div>
+        <button
+          (click)="volver()"
+          style="
+            border: none;
+            background: #e8f3ef;
+            color: #087d5b;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 15px;
+          ">
+          ← Volver
+        </button>
+
         <h1>Dashboard</h1>
         <p>Panel de administración de Food Rescue</p>
       </div>
@@ -35,9 +51,11 @@
           <small>Administrador</small>
         </div>
       </div>
+
     </header>
 
     <section class="welcome">
+
       <div>
         <h2>¡Bienvenido, Administrador! 👋</h2>
         <p>
@@ -45,66 +63,10 @@
           registrados en el sistema.
         </p>
       </div>
-    </section>
-
-    <section class="cards">
-
-      <div class="card">
-        <span class="icon">🍎</span>
-        <div>
-          <p>Total de alimentos</p>
-          <h3>0</h3>
-        </div>
-      </div>
-
-      <div class="card available">
-        <span class="icon">✅</span>
-        <div>
-          <p>Disponibles</p>
-          <h3>0</h3>
-        </div>
-      </div>
-
-      <div class="card priority">
-        <span class="icon">⚠️</span>
-        <div>
-          <p>Consumo prioritario</p>
-          <h3>0</h3>
-        </div>
-      </div>
-
-      <div class="card expired">
-        <span class="icon">❌</span>
-        <div>
-          <p>Vencidos</p>
-          <h3>0</h3>
-        </div>
-      </div>
 
     </section>
 
-    <section class="panel">
-
-      <div class="panel-header">
-        <div>
-          <h2>Gestión de alimentos</h2>
-          <p>Administra los productos registrados.</p>
-        </div>
-
-        <button class="primary-button">
-          + Nuevo alimento
-        </button>
-      </div>
-
-      <div class="empty">
-        <span>🥗</span>
-        <h3>No hay alimentos registrados</h3>
-        <p>
-          Cuando registres alimentos aparecerán aquí.
-        </p>
-      </div>
-
-    </section>
+    <!-- Lo demás queda igual -->
 
   </main>
 

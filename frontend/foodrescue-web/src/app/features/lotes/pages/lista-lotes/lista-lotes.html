@@ -1,0 +1,145 @@
+
+<div class="lotes-container">
+  <div class="encabezado">
+    <div>
+      <h1>Gestión de lotes</h1>
+      <p>Consulta las cantidades, precios y fechas de vencimiento.</p>
+    </div>
+
+    <div class="acciones">
+      <button class="btn-actualizar" (click)="cargarLotes()">
+        Actualizar
+      </button>
+
+      <button class="btn-registrar" (click)="mostrarFormulario = !mostrarFormulario">
+        {{ mostrarFormulario ? 'Cancelar' : 'Registrar lote' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="mensaje-exito" *ngIf="mensaje">
+    {{ mensaje }}
+  </div>
+
+  <div class="mensaje-error" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <div class="formulario-lote" *ngIf="mostrarFormulario">
+    <h2>Registrar nuevo lote</h2>
+
+    <form (ngSubmit)="registrarLote()" #formLote="ngForm">
+      <div class="campos">
+        <div class="campo">
+          <label for="codigoLote">Código de lote</label>
+          <input
+            id="codigoLote"
+            type="text"
+            name="codigoLote"
+            [(ngModel)]="nuevoLote.codigoLote"
+            placeholder="Ej. LOTE-002"
+            required
+          />
+        </div>
+
+        <div class="campo">
+          <label for="alimentoId">Producto</label>
+          <select
+            id="alimentoId"
+            name="alimentoId"
+            [(ngModel)]="nuevoLote.alimentoId"
+            required
+          >
+            <option [ngValue]="null" disabled>Selecciona un producto</option>
+            <option *ngFor="let alimento of alimentos" [ngValue]="alimento.id">
+              {{ alimento.producto }}
+            </option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="cantidad">Cantidad</label>
+          <input
+            id="cantidad"
+            type="number"
+            name="cantidad"
+            [(ngModel)]="nuevoLote.cantidad"
+            min="1"
+            required
+          />
+        </div>
+
+        <div class="campo">
+          <label for="fechaVencimiento">Fecha de vencimiento</label>
+          <input
+            id="fechaVencimiento"
+            type="date"
+            name="fechaVencimiento"
+            [(ngModel)]="nuevoLote.fechaVencimiento"
+            required
+          />
+        </div>
+
+        <div class="campo">
+          <label for="precioUnitario">Precio unitario ($)</label>
+          <input
+            id="precioUnitario"
+            type="number"
+            name="precioUnitario"
+            [(ngModel)]="nuevoLote.precioUnitario"
+            min="0"
+            step="0.01"
+            required
+          />
+        </div>
+      </div>
+
+      <button
+        class="btn-guardar"
+        type="submit"
+        [disabled]="formLote.invalid || guardando"
+      >
+        {{ guardando ? 'Guardando...' : 'Guardar lote' }}
+      </button>
+    </form>
+  </div>
+
+  <div class="resumen">
+    <div class="tarjeta">
+      <span>Total de lotes registrados</span>
+      <h2>{{ lotes.length }}</h2>
+    </div>
+  </div>
+
+  <p *ngIf="cargando">Cargando lotes...</p>
+
+  <div class="tabla-contenedor" *ngIf="!cargando && !error">
+    <table>
+      <thead>
+        <tr>
+          <th>Código de lote</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Fecha de vencimiento</th>
+          <th>Precio unitario</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let lote of lotes">
+          <td>{{ lote.codigoLote }}</td>
+          <td>{{ lote.alimento?.producto || 'Sin producto' }}</td>
+          <td>{{ lote.cantidad }}</td>
+          <td>{{ lote.fechaVencimiento | date:'dd/MM/yyyy' }}</td>
+          <td>{{ lote.precioUnitario | currency:'USD':'symbol':'1.2-2' }}</td>
+        </tr>
+
+        <tr *ngIf="lotes.length === 0">
+          <td colspan="5" class="sin-datos">
+            Todavía no hay lotes registrados.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

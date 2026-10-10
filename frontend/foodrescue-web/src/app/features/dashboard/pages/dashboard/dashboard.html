@@ -1,1 +1,22 @@
-<p>dashboard works!</p>
+
+<h1>PRUEBA FOOD RESCUE</h1>
+
+<h1>Food Rescue</h1>
+
+<h2>Alimentos registrados</h2>
+
+<div *ngIf="alimentos.length > 0">
+  <div *ngFor="let alimento of alimentos">
+    <p><strong>Producto:</strong> {{ alimento.producto }}</p>
+    <p><strong>Cantidad:</strong> {{ alimento.cantidad }}</p>
+    <p><strong>Fecha de vencimiento:</strong> {{ alimento.fechaVencimiento | date:'dd/MM/yyyy' }}</p>
+    <p><strong>Tipo de alimento:</strong> {{ alimento.tipoAlimento }}</p>
+    <p><strong>Estado:</strong> {{ alimento.estado }}</p>
+    <p><strong>Responsable:</strong> {{ alimento.responsable }}</p>
+    <hr>
+  </div>
+</div>
+
+<p *ngIf="alimentos.length === 0">
+  No hay alimentos registrados.
+</p>

@@ -8,6 +8,8 @@ public class Alimento
 
     public int Cantidad { get; set; }
 
+    public string UnidadMedida { get; set; } = "Unidades";
+
     public DateTime FechaVencimiento { get; set; }
 
     public string TipoAlimento { get; set; } = string.Empty;

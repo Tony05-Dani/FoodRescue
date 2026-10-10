@@ -1,3 +1,4 @@
+
 using FoodRescue.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,4 +12,6 @@ public class FoodRescueDbContext : DbContext
     }
 
     public DbSet<Alimento> Alimentos { get; set; }
+
+    public DbSet<Lote> Lotes { get; set; }
 }

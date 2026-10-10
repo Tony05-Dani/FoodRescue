@@ -1,0 +1,220 @@
+
+.lotes-container {
+  padding: 30px;
+  background: #f3faf6;
+  min-height: 100vh;
+  color: #24352e;
+}
+
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.encabezado h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  color: #087d5b;
+}
+
+.encabezado p {
+  margin: 0;
+  color: #64756d;
+}
+
+.btn-actualizar {
+  border: none;
+  background: #0b8f68;
+  color: white;
+  padding: 11px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-actualizar:hover {
+  background: #087d5b;
+}
+
+.resumen {
+  margin-bottom: 25px;
+}
+
+.tarjeta {
+  background: white;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  max-width: 280px;
+}
+
+.tarjeta span {
+  color: #64756d;
+  font-size: 14px;
+}
+
+.tarjeta h2 {
+  color: #087d5b;
+  font-size: 30px;
+  margin: 10px 0 0;
+}
+
+.tabla-contenedor {
+  background: white;
+  border-radius: 12px;
+  overflow-x: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+thead {
+  background: #e5f4ec;
+}
+
+th,
+td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid #e8eee9;
+}
+
+th {
+  color: #087d5b;
+  font-size: 14px;
+}
+
+td {
+  font-size: 14px;
+}
+
+tbody tr:hover {
+  background: #f7fbf8;
+}
+
+.sin-datos {
+  text-align: center;
+  color: #64756d;
+  padding: 30px;
+}
+
+.mensaje-error {
+  padding: 15px;
+  background: #fff0f0;
+  color: #b42318;
+  border-radius: 8px;
+}
+
+
+.acciones {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-registrar,
+.btn-guardar {
+  border: none;
+  background: #087d5b;
+  color: white;
+  padding: 11px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-registrar:hover,
+.btn-guardar:hover {
+  background: #066548;
+}
+
+.formulario-lote {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.formulario-lote h2 {
+  color: #087d5b;
+  font-size: 20px;
+  margin: 0 0 22px;
+}
+
+.campos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.campo label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #34483e;
+}
+
+.campo input,
+.campo select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #d5e2da;
+  border-radius: 8px;
+  background: #fff;
+  color: #24352e;
+  font-size: 14px;
+}
+
+.campo input:focus,
+.campo select:focus {
+  outline: none;
+  border-color: #0b8f68;
+  box-shadow: 0 0 0 3px rgba(11, 143, 104, 0.12);
+}
+
+.btn-guardar:disabled {
+  background: #a8c8b9;
+  cursor: not-allowed;
+}
+
+.mensaje-exito {
+  padding: 14px;
+  margin-bottom: 18px;
+  background: #e5f6eb;
+  color: #087443;
+  border-radius: 8px;
+}
+
+@media (max-width: 650px) {
+  .lotes-container {
+    padding: 18px;
+  }
+
+  .encabezado {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .campos {
+    grid-template-columns: 1fr;
+  }
+
+  .formulario-lote {
+    padding: 18px;
+  }
+}

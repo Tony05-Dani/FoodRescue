@@ -1,1 +1,127 @@
-<p>lista-alimentos works!</p>
+<div class="panel">
+
+  <div class="header">
+
+    <div>
+
+      <button
+        (click)="volver()"
+        style="
+          border: none;
+          background: #e8f3ef;
+          color: #087d5b;
+          padding: 10px 18px;
+          border-radius: 10px;
+          font-weight: bold;
+          cursor: pointer;
+          margin-bottom: 15px;
+        ">
+        ← Volver
+      </button>
+
+      <h1>Gestión de alimentos</h1>
+
+      <p>
+        Administra los alimentos registrados en Food Rescue.
+      </p>
+
+    </div>
+
+    <button
+      class="btn-primary"
+      (click)="nuevoAlimento()">
+      + Nuevo alimento
+    </button>
+
+  </div>
+
+
+  <div class="food-grid">
+
+    <div
+      class="food-card"
+      *ngFor="let alimento of alimentos">
+
+      <div class="food-header">
+
+        <div class="food-icon">
+          🍽️
+        </div>
+
+        <span
+          class="status"
+          [ngClass]="{
+            'available': alimento.estado === 'Disponible',
+            'priority': alimento.estado === 'Consumo prioritario',
+            'unavailable': alimento.estado === 'No disponible'
+          }">
+
+          {{ alimento.estado }}
+
+        </span>
+
+      </div>
+
+
+      <h2>
+        {{ alimento.producto }}
+      </h2>
+
+
+      <div class="food-info">
+
+        <p>
+          <strong>Cantidad:</strong>
+          {{ alimento.cantidad }}
+        </p>
+
+        <p>
+          <strong>Tipo:</strong>
+          {{ alimento.tipoAlimento }}
+        </p>
+
+        <p>
+          <strong>Vencimiento:</strong>
+          {{ alimento.fechaVencimiento | date:'dd/MM/yyyy' }}
+        </p>
+
+        <p>
+          <strong>Responsable:</strong>
+          {{ alimento.responsable }}
+        </p>
+
+      </div>
+
+
+      <div class="actions">
+
+        <button
+          class="btn-edit"
+          (click)="editarAlimento(alimento.id)">
+          Editar
+        </button>
+
+        <button
+          class="btn-delete"
+          (click)="eliminarAlimento(alimento.id)">
+          Eliminar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div
+    class="empty"
+    *ngIf="alimentos.length === 0">
+
+    <p>
+      No hay alimentos registrados.
+    </p>
+
+  </div>
+
+</div>
