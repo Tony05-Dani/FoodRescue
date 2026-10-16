@@ -39,6 +39,14 @@ export class ListaAlimentos implements OnInit {
     });
   }
 
+  
+      contarPorEstado(estado: string): number {
+       return this.alimentos.filter(
+       alimento => alimento.estado === estado
+       ).length;
+  }
+
+
   nuevoAlimento(): void {
     this.router.navigate(['/admin/alimentos/crear']);
   }

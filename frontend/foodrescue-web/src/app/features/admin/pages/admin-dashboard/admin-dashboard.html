@@ -1,73 +1,11 @@
-<div class="dashboard">
+﻿<div class="panel">
+  <h1>Panel administrativo</h1>
 
-  <aside class="sidebar">
+  <button class="btn-secondary" (click)="volver()">
+    Volver
+  </button>
 
-    <div class="brand">
-      <span>🥗</span>
-      <h2>Food Rescue</h2>
-    </div>
-
-    <nav>
-      <a class="active">📊 Dashboard</a>
-      <a routerLink="/admin/alimentos">🍴 Alimentos</a>
-      <a routerLink="/admin/usuarios">👥 Usuarios</a>
-      <a routerLink="/admin/reportes">📋 Reportes</a>
-    </nav>
-
-    <button class="logout" (click)="cerrarSesion()">
-      🚪 Cerrar sesión
-    </button>
-
-  </aside>
-
-  <main class="content">
-
-    <header>
-
-      <div>
-        <button
-          (click)="volver()"
-          style="
-            border: none;
-            background: #e8f3ef;
-            color: #087d5b;
-            padding: 10px 18px;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 15px;
-          ">
-          ← Volver
-        </button>
-
-        <h1>Dashboard</h1>
-        <p>Panel de administración de Food Rescue</p>
-      </div>
-
-      <div class="user">
-        <div class="avatar">A</div>
-        <div>
-          <strong>Administrador</strong>
-          <small>Administrador</small>
-        </div>
-      </div>
-
-    </header>
-
-    <section class="welcome">
-
-      <div>
-        <h2>¡Bienvenido, Administrador! 👋</h2>
-        <p>
-          Desde aquí puedes controlar y gestionar los alimentos
-          registrados en el sistema.
-        </p>
-      </div>
-
-    </section>
-
-    <!-- Lo demás queda igual -->
-
-  </main>
-
+  <button class="btn-primary" (click)="cerrarSesion()">
+    Cerrar sesión
+  </button>
 </div>

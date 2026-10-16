@@ -1,52 +1,55 @@
+
 <div class="panel">
-
-  <div class="header">
-
-    <div>
-
-      <button
-        (click)="volver()"
-        style="
-          border: none;
-          background: #e8f3ef;
-          color: #087d5b;
-          padding: 10px 18px;
-          border-radius: 10px;
-          font-weight: bold;
-          cursor: pointer;
-          margin-bottom: 15px;
-        ">
-        ← Volver
+  <header class="header">
+    <div class="header-left">
+      <button class="btn-secondary" (click)="volver()">
+        ← Volver al panel
       </button>
 
-      <h1>Gestión de alimentos</h1>
-
-      <p>
-        Administra los alimentos registrados en Food Rescue.
-      </p>
-
+      <div class="page-heading">
+        <span class="eyebrow">ADMINISTRACIÓN / INVENTARIO</span>
+        <h1>Gestión de alimentos</h1>
+        <p>Administra los alimentos registrados en Food Rescue.</p>
+      </div>
     </div>
 
-    <button
-      class="btn-primary"
-      (click)="nuevoAlimento()">
-      + Nuevo alimento
+    <button class="btn-primary" (click)="nuevoAlimento()">
+      + Registrar alimento
     </button>
+  </header>
 
-  </div>
+  <section class="summary">
+    <div class="summary-card">
+      <span class="summary-label">Alimentos registrados</span>
+      <strong>{{ alimentos.length }}</strong>
+      <span class="summary-note">Registros en el sistema</span>
+    </div>
 
+    <div class="summary-card">
+      <span class="summary-label">Disponibles</span>
+      <strong>{{ contarPorEstado('Disponible') }}</strong>
+      <span class="summary-note">Listos para su gestión</span>
+    </div>
 
-  <div class="food-grid">
+    <div class="summary-card">
+      <span class="summary-label">Consumo prioritario</span>
+      <strong>{{ contarPorEstado('Consumo prioritario') }}</strong>
+      <span class="summary-note">Requieren atención prioritaria</span>
+    </div>
+  </section>
 
-    <div
-      class="food-card"
-      *ngFor="let alimento of alimentos">
+  <section class="section-heading">
+    <div>
+      <h2>Inventario de alimentos</h2>
+      <p>Consulta los detalles y administra cada registro.</p>
+    </div>
+    <span class="record-count">{{ alimentos.length }} registros</span>
+  </section>
 
+  <section class="food-grid" *ngIf="alimentos.length > 0; else sinAlimentos">
+    <article class="food-card" *ngFor="let alimento of alimentos">
       <div class="food-header">
-
-        <div class="food-icon">
-          🍽️
-        </div>
+        <div class="food-icon">♧</div>
 
         <span
           class="status"
@@ -55,73 +58,50 @@
             'priority': alimento.estado === 'Consumo prioritario',
             'unavailable': alimento.estado === 'No disponible'
           }">
-
-          {{ alimento.estado }}
-
+          {{ alimento.estado || 'Sin estado' }}
         </span>
-
       </div>
 
-
-      <h2>
-        {{ alimento.producto }}
-      </h2>
-
+      <h3>{{ alimento.producto }}</h3>
+      <p class="food-type">{{ alimento.tipoAlimento || 'Tipo no especificado' }}</p>
 
       <div class="food-info">
+        <div class="info-row">
+          <span>Cantidad</span>
+          <strong>{{ alimento.cantidad }}</strong>
+        </div>
 
-        <p>
-          <strong>Cantidad:</strong>
-          {{ alimento.cantidad }}
-        </p>
+        <div class="info-row">
+          <span>Fecha de vencimiento</span>
+          <strong>{{ alimento.fechaVencimiento ? (alimento.fechaVencimiento | date:'dd/MM/yyyy') : 'No registrada' }}</strong>
+        </div>
 
-        <p>
-          <strong>Tipo:</strong>
-          {{ alimento.tipoAlimento }}
-        </p>
-
-        <p>
-          <strong>Vencimiento:</strong>
-          {{ alimento.fechaVencimiento | date:'dd/MM/yyyy' }}
-        </p>
-
-        <p>
-          <strong>Responsable:</strong>
-          {{ alimento.responsable }}
-        </p>
-
+        <div class="info-row">
+          <span>Responsable</span>
+          <strong>{{ alimento.responsable || 'No especificado' }}</strong>
+        </div>
       </div>
 
-
       <div class="actions">
-
-        <button
-          class="btn-edit"
-          (click)="editarAlimento(alimento.id)">
+        <button class="btn-edit" (click)="editarAlimento(alimento.id)">
           Editar
         </button>
 
-        <button
-          class="btn-delete"
-          (click)="eliminarAlimento(alimento.id)">
+        <button class="btn-delete" (click)="eliminarAlimento(alimento.id)">
           Eliminar
         </button>
-
       </div>
+    </article>
+  </section>
 
+  <ng-template #sinAlimentos>
+    <div class="empty">
+      <div class="empty-icon">◇</div>
+      <h3>No hay alimentos registrados</h3>
+      <p>Cuando registres alimentos, aparecerán aquí.</p>
+      <button class="btn-primary" (click)="nuevoAlimento()">
+        Registrar primer alimento
+      </button>
     </div>
-
-  </div>
-
-
-  <div
-    class="empty"
-    *ngIf="alimentos.length === 0">
-
-    <p>
-      No hay alimentos registrados.
-    </p>
-
-  </div>
-
+  </ng-template>
 </div>

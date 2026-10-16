@@ -1,1 +1,101 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --forest: #0e4d36;
+  --forest-deep: #0a3626;
+  --forest-hover: #0b3f2c;
+  --leaf: #2f9e63;
+  --mint: #e2f1e7;
+
+  --soil: #6b4e37;
+  --soil-tint: #efe8e0;
+
+  --ink: #12261c;
+  --ink-soft: #4a5d52;
+  --ink-faint: #64766b;
+  --bg: #f1f5f0;
+  --surface: #ffffff;
+  --line: #dbe4da;
+
+  --ok: #2f9e63;
+  --ok-tint: #e1f3e8;
+  --ok-ink: #176a3e;
+  --warn: #d98e04;
+  --warn-tint: #fdf0d2;
+  --warn-ink: #80530a;
+  --danger: #c93c3c;
+  --danger-tint: #fbe4e2;
+  --danger-ink: #992b2b;
+
+  --font-display: 'Bricolage Grotesque', 'Trebuchet MS', system-ui, sans-serif;
+  --font-body: 'Figtree', 'Segoe UI', system-ui, sans-serif;
+
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 20px;
+  --shadow-card: 0 1px 2px rgba(18, 38, 28, 0.06), 0 8px 20px -10px rgba(18, 38, 28, 0.14);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: var(--forest);
+}
+
+:focus-visible {
+  outline: 3px solid rgba(47, 158, 99, 0.6);
+  outline-offset: 2px;
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

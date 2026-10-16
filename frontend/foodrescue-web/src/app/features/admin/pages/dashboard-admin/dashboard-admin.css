@@ -1,21 +1,25 @@
-
 :host {
   display: block;
   min-height: 100vh;
 }
 
 .panel {
-  min-height: 100vh;
-  padding: 50px 70px;
-  background: #f3faf6;
-  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(20px, 4vw, 48px);
 }
+
+
+/* =========================================
+   ENCABEZADO
+   ========================================= */
 
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 45px;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: clamp(24px, 5vw, 40px);
 }
 
 .logo {
@@ -25,216 +29,329 @@
 }
 
 .logo-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  background: #0b8f68;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 25px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-md);
+  background: var(--forest);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .logo h1 {
-  margin: 0;
-  color: #087d5b;
-  font-size: 28px;
+  color: var(--forest);
+  font-size: 1.35rem;
 }
 
 .logo p {
-  margin: 3px 0 0;
-  color: #777;
+  color: var(--ink-faint);
+  font-size: 0.85rem;
 }
 
-.welcome {
-  margin-bottom: 30px;
-}
-
-.welcome h2 {
-  font-size: 38px;
-  color: #17231f;
-  margin: 0 0 10px;
-}
-
-.welcome p {
-  color: #6b7772;
-  font-size: 17px;
-  margin: 0;
-}
-
-.summary-card {
-  max-width: 1000px;
-  background: white;
-  border-radius: 22px;
-  padding: 30px;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 40px;
-}
-
-.summary-label {
-  color: #68736f;
-  font-size: 16px;
-}
-
-.summary-card h3 {
-  color: #087d5b;
-  font-size: 42px;
-  margin: 8px 0;
-}
-
-.summary-card p {
-  color: #777;
-  margin: 0;
-}
-
-.summary-icon {
-  width: 65px;
-  height: 65px;
-  border-radius: 18px;
-  background: #e5f7ef;
-  display: flex;
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
+  gap: 8px;
+  height: 44px;
+  padding: 0 20px;
+  border-radius: var(--r-md);
+  font-weight: 600;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
-
-/* ENCABEZADO DE LA SECCIÓN */
-
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1000px;
-  margin-bottom: 25px;
-}
-
-.section-header h2 {
-  color: #17231f;
-  font-size: 26px;
-  margin: 0;
-}
-
-.section-header p {
-  color: #6b7772;
-  margin: 6px 0 0;
-  font-size: 15px;
-}
-
-/* BOTÓN GESTIONAR ALIMENTOS */
 
 .btn-primary {
-  border: none;
-  background: #07875f;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 14px;
+  border: 0;
+  background: var(--forest);
+  color: #fff;
 }
 
 .btn-primary:hover {
-  background: #066e4e;
+  background: var(--forest-hover);
 }
 
-/* TARJETAS DE ALIMENTOS */
+.btn-secondary {
+  height: 42px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-soft);
+}
+
+.btn-secondary:hover {
+  border-color: var(--forest);
+  color: var(--forest);
+}
+
+main {
+  display: grid;
+  gap: 28px;
+}
+
+
+/* =========================================
+   BIENVENIDA
+   ========================================= */
+
+.welcome {
+  padding: clamp(28px, 5vw, 48px);
+  border-radius: var(--r-lg);
+  background: var(--forest-deep);
+  color: #fff;
+}
+
+.welcome-tag {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #c9e0d3;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.welcome h2 {
+  margin-bottom: 10px;
+  font-size: clamp(2rem, 4.4vw, 3rem);
+}
+
+.welcome p {
+  max-width: 52ch;
+  color: #c9e0d3;
+  font-size: 1.0625rem;
+}
+
+
+/* =========================================
+   TOTAL DE ALIMENTOS
+   ========================================= */
+
+.summary-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 28px 28px 24px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.summary-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--soil);
+}
+
+.summary-label {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.summary-card h3 {
+  margin: 2px 0;
+  font-size: 3rem;
+  line-height: 1.1;
+}
+
+.summary-card p {
+  color: var(--ink-faint);
+  font-size: 0.9rem;
+}
+
+.summary-icon {
+  width: 56px;
+  height: 56px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-md);
+  background: var(--soil-tint);
+  color: var(--soil);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   INVENTARIO
+   ========================================= */
+
+.section-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.section-header h2 {
+  font-size: 1.5rem;
+}
+
+.section-header p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
 
 .food-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
-  max-width: 1000px;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 20px;
 }
 
 .food-card {
-  background: white;
-  border-radius: 22px;
-  padding: 25px;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 24px 20px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.food-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--stripe, var(--line));
 }
 
 .food-card-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
 .food-icon {
-  width: 45px;
-  height: 45px;
-  border-radius: 13px;
-  background: #e5f7ef;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-}
-
-.food-card h3 {
-  color: #17231f;
-  font-size: 23px;
-  margin: 10px 0 20px;
-}
-
-.food-info p {
-  color: #68736f;
-  margin: 10px 0;
-}
-
-.food-info strong {
-  color: #17231f;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-md);
+  background: var(--mint);
+  color: var(--forest);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 .status {
-  padding: 7px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: bold;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #eceeed;
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
-.available {
-  background: #e3f7ec;
-  color: #087d5b;
+.food-card h3 {
+  font-size: 1.35rem;
 }
 
-.priority {
-  background: #fff4cc;
-  color: #9a7200;
+.food-info {
+  margin-top: 16px;
 }
 
-.unavailable {
-  background: #fde5e5;
-  color: #b42318;
+.food-info p {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  font-size: 0.92rem;
 }
 
-/* RESPONSIVE */
-
-@media (max-width: 700px) {
-
-  .panel {
-    padding: 30px 20px;
-  }
-
-  .welcome h2 {
-    font-size: 30px;
-  }
-
-  .summary-card {
-    padding: 22px;
-  }
-
-  .section-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
-
-  .food-grid {
-    grid-template-columns: 1fr;
-  }
+.food-info strong {
+  color: var(--ink-soft);
+  font-weight: 400;
 }
 
+.food-info span {
+  text-align: right;
+  font-weight: 600;
+}
+
+
+/* =========================================
+   SIN ALIMENTOS
+   ========================================= */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 56px 24px;
+  border: 1.5px dashed var(--line);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  text-align: center;
+}
+
+.empty-icon {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 4px;
+  border-radius: 50%;
+  background: var(--mint);
+  color: var(--forest);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.empty-state h3 {
+  font-size: 1.25rem;
+}
+
+.empty-state p {
+  max-width: 40ch;
+  color: var(--ink-soft);
+}
+
+.empty-state .btn-primary {
+  margin-top: 12px;
+}
+
+
+/* =========================================
+   PIE
+   ========================================= */
+
+.footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-faint);
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+
+/* =========================================
+   SEMÁFORO (opcional)
+   Solo se activa si agregas [ngClass] al

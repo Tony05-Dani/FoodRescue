@@ -1,96 +1,92 @@
 
 <div class="panel">
-<button
-  (click)="volver()"
-  style="
-    border: none;
-    background: #e8f3ef;
-    color: #087d5b;
-    padding: 10px 18px;
-    border-radius: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 15px;
-  ">
-  ← Volver
-</button>
-  <div class="header">
+  <header class="header">
     <div class="logo">
-      <div class="logo-icon">🥗</div>
+      <div class="logo-icon">FR</div>
       <div>
         <h1>Food Rescue</h1>
-        <p>Panel de administración</p>
+        <p>Gestión responsable de alimentos</p>
       </div>
     </div>
-  </div>
 
-  <div class="welcome">
-    <h2>Dashboard</h2>
-    <p>Consulta y controla los alimentos registrados en el sistema.</p>
-  </div>
+    <button class="btn-secondary" (click)="volver()">
+      Volver al inicio
+    </button>
+  </header>
 
-  <div class="summary-card">
-    <div>
-      <span class="summary-label">Alimentos registrados</span>
-      <h3>{{ alimentos.length }}</h3>
-      <p>Registros encontrados en el sistema</p>
-    </div>
+  <main>
+    <section class="welcome">
+      <span class="welcome-tag">PANEL ADMINISTRATIVO</span>
+      <h2>¡Bienvenido a Food Rescue!</h2>
+      <p>
+        Administra los alimentos registrados y consulta su información
+        desde un solo lugar.
+      </p>
+    </section>
 
-    <div class="summary-icon">
-      🍎
-    </div>
-  </div>
+    <section class="summary-card">
+      <div>
+        <span class="summary-label">Total de alimentos registrados</span>
+        <h3>{{ alimentos.length }}</h3>
+        <p>Registros disponibles en el sistema</p>
+      </div>
+      <div class="summary-icon">FR</div>
+    </section>
 
-  <div class="section-header">
-      <h2>Alimentos registrados</h2>
-  </div>
-  
-
-  <div class="food-grid">
-
-    <div class="food-card" *ngFor="let alimento of alimentos">
-
-      <div class="food-card-header">
-        <div class="food-icon">🍽️</div>
-
-        <span
-          class="status"
-          [ngClass]="{
-            'available': alimento.estado === 'Disponible',
-            'priority': alimento.estado === 'Consumo prioritario',
-            'unavailable': alimento.estado === 'No disponible'
-          }">
-          {{ alimento.estado }}
-        </span>
+    <section class="section-header">
+      <div>
+        <h2>Inventario de alimentos</h2>
+        <p>Consulta las cantidades, fechas y responsables.</p>
       </div>
 
-      <h3>{{ alimento.producto }}</h3>
+      <button class="btn-primary" (click)="irAlimentos()">
+        Gestionar alimentos
+      </button>
+    </section>
 
-      <div class="food-info">
-        <p>
-          <strong>Cantidad:</strong>
-          {{ alimento.cantidad }}
-        </p>
+    <section class="food-grid" *ngIf="alimentos.length > 0">
+      <article class="food-card" *ngFor="let alimento of alimentos">
+        <div class="food-card-header">
+          <div class="food-icon">FR</div>
+          <span class="status">
+            {{ alimento.estado || 'Sin estado' }}
+          </span>
+        </div>
 
-        <p>
-          <strong>Tipo:</strong>
-          {{ alimento.tipoAlimento }}
-        </p>
+        <h3>{{ alimento.producto }}</h3>
 
-        <p>
-          <strong>Vencimiento:</strong>
-          {{ alimento.fechaVencimiento | date:'dd/MM/yyyy' }}
-        </p>
+        <div class="food-info">
+          <p>
+            <strong>Cantidad</strong>
+            <span>{{ alimento.cantidad }}</span>
+          </p>
+          <p>
+            <strong>Tipo de alimento</strong>
+            <span>{{ alimento.tipoAlimento }}</span>
+          </p>
+          <p>
+            <strong>Fecha de vencimiento</strong>
+            <span>{{ alimento.fechaVencimiento | date:'dd/MM/yyyy' }}</span>
+          </p>
+          <p>
+            <strong>Responsable</strong>
+            <span>{{ alimento.responsable }}</span>
+          </p>
+        </div>
+      </article>
+    </section>
 
-        <p>
-          <strong>Responsable:</strong>
-          {{ alimento.responsable }}
-        </p>
-      </div>
+    <section class="empty-state" *ngIf="alimentos.length === 0">
+      <div class="empty-icon">FR</div>
+      <h3>No hay alimentos registrados</h3>
+      <p>Cuando registres alimentos, aparecerán aquí.</p>
+      <button class="btn-primary" (click)="irAlimentos()">
+        Registrar alimentos
+      </button>
+    </section>
+  </main>
 
-    </div>
-
-  </div>
-
+  <footer class="footer">
+    <p>Food Rescue · Aprovechamiento responsable de alimentos</p>
+  </footer>
 </div>
-
