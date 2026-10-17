@@ -341,3 +341,42 @@ td {
 .alerta-vencida strong {
   color: #b42323;
 }
+
+
+.btn-cerrar-sesion {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-cerrar-sesion:hover {
+  background-color: #b02a37;
+  transform: translateY(-1px);
+}
+
+.btn-cerrar-sesion:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .btn-cerrar-sesion {
+    margin-left: auto;
+  }
+}
+

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Alimentos } from '../../../../core/services/alimentos';
+import { Lotes } from '../../../../core/services/lotes';
 
 @Component({
   selector: 'app-crear-alimento',
@@ -15,41 +16,70 @@ import { Alimentos } from '../../../../core/services/alimentos';
 export class CrearAlimento {
 
   alimento = {
-  producto: '',
-  cantidad: 0,
-  unidadMedida: 'Unidades',
-  fechaVencimiento: '',
-  tipoAlimento: '',
-  estado: 'Disponible',
-  responsable: ''
-};
+    producto: '',
+    cantidad: 0,
+    unidadMedida: 'Unidades',
+    fechaVencimiento: '',
+    tipoAlimento: '',
+    estado: 'Disponible',
+    responsable: ''
+  };
+
+  lote = {
+    codigoLote: '',
+    cantidad: 1,
+    fechaVencimiento: '',
+    precioUnitario: 0
+  };
 
   guardando = false;
 
   constructor(
     private alimentosService: Alimentos,
+    private lotesService: Lotes,
     private router: Router
   ) {}
 
   guardar(): void {
-
     if (
-      !this.alimento.producto ||
-      !this.alimento.cantidad ||
+      !this.alimento.producto.trim() ||
+      this.alimento.cantidad <= 0 ||
       !this.alimento.fechaVencimiento ||
       !this.alimento.tipoAlimento ||
-      !this.alimento.responsable
+      !this.alimento.responsable.trim() ||
+      !this.lote.codigoLote.trim() ||
+      this.lote.cantidad <= 0 ||
+      !this.lote.fechaVencimiento ||
+      this.lote.precioUnitario < 0
     ) {
-      alert('Completa todos los campos.');
+      alert('Completa todos los campos correctamente.');
       return;
     }
 
     this.guardando = true;
 
     this.alimentosService.crearAlimento(this.alimento).subscribe({
-      next: () => {
-        alert('Alimento registrado correctamente.');
-        this.router.navigate(['/admin/alimentos']);
+      next: (alimentoCreado) => {
+        const nuevoLote = {
+          ...this.lote,
+          alimentoId: alimentoCreado.id
+        };
+
+        this.lotesService.crearLote(nuevoLote).subscribe({
+          next: () => {
+            alert('Alimento y primer lote registrados correctamente.');
+            this.router.navigate(['/admin/alimentos']);
+          },
+          error: (error) => {
+            console.error('Error al registrar el lote:', error);
+            alert(
+              `El alimento se registró, pero el lote no. ` +
+              `El alimento tiene el ID ${alimentoCreado.id}. ` +
+              'Puedes registrar el lote desde la gestión de lotes.'
+            );
+            this.guardando = false;
+          }
+        });
       },
       error: (error) => {
         console.error('Error al registrar el alimento:', error);
@@ -63,4 +93,3 @@ export class CrearAlimento {
     this.router.navigate(['/admin/alimentos']);
   }
 }
-

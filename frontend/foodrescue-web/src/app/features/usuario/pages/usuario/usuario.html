@@ -1,6 +1,7 @@
 
 <div class="panel">
 
+  <!-- Encabezado -->
   <div class="header">
     <div class="logo">
       <div class="logo-icon">🥗</div>
@@ -10,11 +11,16 @@
       </div>
     </div>
 
-    <button class="logout" (click)="cerrarSesion()">
+    <button
+      type="button"
+      class="btn-cerrar-sesion"
+      (click)="cerrarSesion()">
+      <span aria-hidden="true">↪</span>
       Cerrar sesión
     </button>
   </div>
 
+  <!-- Bienvenida -->
   <div class="welcome">
     <h2>¡Hola! 👋</h2>
     <p>
@@ -23,6 +29,7 @@
     </p>
   </div>
 
+  <!-- Resumen -->
   <div class="resumen">
 
     <div class="resumen-card">
@@ -43,52 +50,55 @@
 
   </div>
 
+  <!-- Alertas de alimentos vencidos -->
   <section class="seccion">
 
-    
-<section class="seccion">
-  <div class="seccion-header">
-    <div>
-      <h2>🚨 Alimentos vencidos</h2>
-      <p>Productos cuya fecha de vencimiento ya pasó.</p>
+    <div class="seccion-header">
+      <div>
+        <h2>🚨 Alimentos vencidos</h2>
+        <p>Productos cuya fecha de vencimiento ya pasó.</p>
+      </div>
     </div>
-  </div>
-
-  <div
-    *ngIf="!cargando && alimentosVencidos.length === 0"
-    class="mensaje">
-    No hay alimentos vencidos registrados.
-  </div>
-
-  <div
-    class="alertas"
-    *ngIf="!cargando && alimentosVencidos.length > 0">
 
     <div
-      class="alerta alerta-vencida"
-      *ngFor="let alimento of alimentosVencidos">
+      *ngIf="!cargando && alimentosVencidos.length === 0"
+      class="mensaje">
+      No hay alimentos vencidos registrados.
+    </div>
 
-      <div>
-        <strong>{{ alimento.producto }}</strong>
-        <p>
-          Venció el
-          {{ alimento.fechaVencimiento | date:'dd/MM/yyyy' }}
-        </p>
-        <p>
-          Cantidad: {{ alimento.cantidad }}
-          {{ alimento.unidadMedida || 'Unidades' }}
-        </p>
+    <div
+      class="alertas"
+      *ngIf="!cargando && alimentosVencidos.length > 0">
+
+      <div
+        class="alerta alerta-vencida"
+        *ngFor="let alimento of alimentosVencidos">
+
+        <div>
+          <strong>{{ alimento.producto }}</strong>
+          <p>
+            Venció el
+            {{ alimento.fechaVencimiento | date:'dd/MM/yyyy' }}
+          </p>
+          <p>
+            Cantidad: {{ alimento.cantidad }}
+            {{ alimento.unidadMedida || 'Unidades' }}
+          </p>
+        </div>
+
+        <span class="estado no-disponible">
+          No disponible
+        </span>
+
       </div>
-
-      <span class="estado no-disponible">
-        No disponible
-      </span>
 
     </div>
 
-  </div>
-</section>
-    
+  </section>
+
+  <!-- Alertas de próximos vencimientos -->
+  <section class="seccion">
+
     <div class="seccion-header">
       <div>
         <h2>🔔 Alertas de vencimiento</h2>
@@ -100,34 +110,45 @@
       Cargando información...
     </div>
 
-    <div *ngIf="!cargando && proximosAVencer.length === 0"
-         class="mensaje">
+    <div
+      *ngIf="!cargando && proximosAVencer.length === 0"
+      class="mensaje">
       No hay alimentos próximos a vencer.
     </div>
 
-    <div class="alertas"
-         *ngIf="!cargando && proximosAVencer.length > 0">
+    <div
+      class="alertas"
+      *ngIf="!cargando && proximosAVencer.length > 0">
 
-      <div class="alerta"
-           *ngFor="let alimento of proximosAVencer">
+      <div
+        class="alerta"
+        *ngFor="let alimento of proximosAVencer">
 
         <div>
           <strong>{{ alimento.producto }}</strong>
           <p>
-            Vence el {{ alimento.fechaVencimiento | date:'dd/MM/yyyy' }}
+            Vence el
+            {{ alimento.fechaVencimiento | date:'dd/MM/yyyy' }}
           </p>
         </div>
 
         <span class="dias">
-          <ng-container *ngIf="diasParaVencer(alimento.fechaVencimiento) === 0">
+
+          <ng-container
+            *ngIf="diasParaVencer(alimento.fechaVencimiento) === 0">
             Vence hoy
           </ng-container>
-          <ng-container *ngIf="diasParaVencer(alimento.fechaVencimiento) === 1">
+
+          <ng-container
+            *ngIf="diasParaVencer(alimento.fechaVencimiento) === 1">
             1 día restante
           </ng-container>
-          <ng-container *ngIf="diasParaVencer(alimento.fechaVencimiento) > 1">
+
+          <ng-container
+            *ngIf="diasParaVencer(alimento.fechaVencimiento) > 1">
             {{ diasParaVencer(alimento.fechaVencimiento) }} días restantes
           </ng-container>
+
         </span>
 
       </div>
@@ -136,6 +157,7 @@
 
   </section>
 
+  <!-- Catálogo de alimentos -->
   <section class="seccion">
 
     <div class="seccion-header">
@@ -144,13 +166,15 @@
         <p>Consulta las cantidades y el estado de cada producto.</p>
       </div>
 
-      <button class="btn-primary"
-              type="button"
-              (click)="cargarAlimentos()">
+      <button
+        class="btn-primary"
+        type="button"
+        (click)="cargarAlimentos()">
         Actualizar
       </button>
     </div>
 
+    <!-- Filtros -->
     <div class="filtros">
 
       <input
@@ -174,17 +198,21 @@
 
     </div>
 
+    <!-- Mensajes -->
     <div *ngIf="error" class="error">
       {{ error }}
     </div>
 
-    <div *ngIf="!cargando && !error && alimentosFiltrados.length === 0"
-         class="mensaje">
+    <div
+      *ngIf="!cargando && !error && alimentosFiltrados.length === 0"
+      class="mensaje">
       No se encontraron alimentos con esos criterios.
     </div>
 
-    <div class="tabla-contenedor"
-         *ngIf="alimentosFiltrados.length > 0">
+    <!-- Tabla -->
+    <div
+      class="tabla-contenedor"
+      *ngIf="alimentosFiltrados.length > 0">
 
       <table>
         <thead>
@@ -199,6 +227,7 @@
 
         <tbody>
           <tr *ngFor="let alimento of alimentosFiltrados">
+
             <td>{{ alimento.producto }}</td>
 
             <td>
@@ -213,15 +242,17 @@
             </td>
 
             <td>
-              <span class="estado"
-                    [ngClass]="{
-                      'disponible': alimento.estado === 'Disponible',
-                      'prioritario': alimento.estado === 'Consumo prioritario',
-                      'no-disponible': alimento.estado === 'No disponible'
-                    }">
+              <span
+                class="estado"
+                [ngClass]="{
+                  'disponible': alimento.estado === 'Disponible',
+                  'prioritario': alimento.estado === 'Consumo prioritario',
+                  'no-disponible': alimento.estado === 'No disponible'
+                }">
                 {{ alimento.estado }}
               </span>
             </td>
+
           </tr>
         </tbody>
       </table>
@@ -230,6 +261,7 @@
 
   </section>
 
+  <!-- Historial de actividad -->
   <section class="seccion">
 
     <div class="seccion-header">
@@ -243,11 +275,13 @@
       Todavía no hay actividades registradas.
     </div>
 
-    <div class="historial"
-         *ngIf="historial.length > 0">
+    <div
+      class="historial"
+      *ngIf="historial.length > 0">
 
-      <div class="historial-item"
-           *ngFor="let actividad of historial">
+      <div
+        class="historial-item"
+        *ngFor="let actividad of historial">
 
         <div>
           <strong>{{ actividad.accion }}</strong>
